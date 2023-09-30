@@ -1,11 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:yazilim_toplulugu/main_page.dart';
-import 'package:yazilim_toplulugu/main_page/desktop.dart';
-import 'package:yazilim_toplulugu/main_page/mobile.dart';
-import 'package:yazilim_toplulugu/main_page/tab.dart';
+import 'package:yazilim_toplulugu/firebase_options.dart';
+import 'package:yazilim_toplulugu/pages/main_page/main_page.dart';
+import 'package:yazilim_toplulugu/pages/main_page/desktop.dart';
+import 'package:yazilim_toplulugu/pages/main_page/mobile.dart';
+import 'package:yazilim_toplulugu/pages/main_page/tab.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(
     const ProviderScope(
       child: MyApp(),

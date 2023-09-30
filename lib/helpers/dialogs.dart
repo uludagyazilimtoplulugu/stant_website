@@ -40,7 +40,7 @@ class UIHelpers {
               ),
               Extensions.boslukHeight(context, 0.004),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
                   subtitle,
                   textAlign: TextAlign.center,
