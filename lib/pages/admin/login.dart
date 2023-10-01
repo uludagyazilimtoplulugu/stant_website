@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,7 +8,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yazilim_toplulugu/helpers/extensions.dart';
+import 'package:yazilim_toplulugu/helpers/toast.dart';
 import 'package:yazilim_toplulugu/main.dart';
+import 'package:yazilim_toplulugu/models/admin.dart';
+import 'package:yazilim_toplulugu/pages/admin/panel.dart';
+import 'package:yazilim_toplulugu/pages/main_page/main_page.dart';
 import 'package:yazilim_toplulugu/utils/colors.dart';
 
 class AdminLoginPage extends ConsumerStatefulWidget {
@@ -33,6 +40,49 @@ class _AdminLoginPageState extends ConsumerState<AdminLoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenType scrType = getScreenType(context);
+    if (scrType == ScreenType.web) {
+      return desktop();
+    } else {
+      return mobile();
+    }
+  }
+
+  mobile() {
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: const Color(0xFFf5f5f5),
+          appBar: AppBar(
+            backgroundColor: const Color(0xFFf5f5f5),
+            leading: const BackButton(
+              color: Colors.black,
+            ),
+          ),
+          body: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.05,
+            ),
+            child: _formLogin(),
+          ),
+        ),
+        isLoading
+            ? Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.black.withOpacity(0.5),
+                child: const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            : const SizedBox(),
+      ],
+    );
+  }
+
+  desktop() {
     return Stack(
       children: [
         Scaffold(
@@ -361,9 +411,64 @@ class _AdminLoginPageState extends ConsumerState<AdminLoginPage> {
     );
   }
 
-  void _login() {
-    setState(() {
-      isLoading = true;
-    });
+  void _login() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      // get the adminler collection from firebase
+      List<Admin> adminler = await FirebaseFirestore.instance
+          .collection("adminler")
+          .get()
+          .then((value) =>
+              value.docs.map((e) => Admin.dokumandanUret(e)).toList());
+      setState(() {
+        isLoading = false;
+      });
+      bool eslesenVarMi = false;
+      for (var element in adminler) {
+        if (element.ogrenciNo == ogrenciNumarasiController.text) {
+          setState(() {
+            eslesenVarMi = true;
+          });
+        }
+      }
+      if (!eslesenVarMi) {
+        warningDialogWeb(
+          subtitle: "Böyle bir admin bulunamadı.",
+        );
+      } else {
+        for (var element in adminler) {
+          if (element.ogrenciNo == ogrenciNumarasiController.text) {
+            if (element.password == sifreController.text) {
+              setState(() {
+                isLoading = false;
+              });
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AdminPaneliPage(
+                    admin: element,
+                  ),
+                ),
+              );
+            } else {
+              warningDialogWeb(
+                subtitle: "Şifreni yanlış girdin.",
+              );
+            }
+          }
+        }
+      }
+    } catch (e) {
+      debugPrint("Hata: $e");
+      setState(() {
+        isLoading = false;
+      });
+      Toast.showErrorToast(
+        context,
+        message: "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+      );
+    }
   }
 }

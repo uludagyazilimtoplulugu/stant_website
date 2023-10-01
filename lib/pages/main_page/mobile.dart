@@ -7,7 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:yazilim_toplulugu/helpers/dialogs.dart';
 import 'package:yazilim_toplulugu/helpers/extensions.dart';
+import 'package:yazilim_toplulugu/pages/admin/login.dart';
 import 'package:yazilim_toplulugu/pages/join_whatsapp_page.dart';
+import 'package:yazilim_toplulugu/pages/request_edu.dart';
 import 'package:yazilim_toplulugu/utils/colors.dart';
 
 class MainPageMobile extends ConsumerStatefulWidget {
@@ -645,7 +647,14 @@ class _MainPageState extends ConsumerState<MainPageMobile> {
                           ),
                         ],
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const EgitimAnketiPage(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -702,7 +711,106 @@ class _MainPageState extends ConsumerState<MainPageMobile> {
                           ),
                         ],
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          bool launched =
+                              // ignore: deprecated_member_use
+                              await launch(
+                            'https://discord.gg/WZMDTB9ydZ',
+                            forceSafariVC: false,
+                          );
+
+                          if (!launched) {
+                            // ignore: deprecated_member_use
+                            launch('https://discord.gg/WZMDTB9ydZ');
+                          }
+                        } catch (e) {
+                          // ignore: deprecated_member_use
+                          launch('https://discord.gg/WZMDTB9ydZ');
+                        }
+                      },
+                      onLongPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AdminLoginPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.1,
+                      left: MediaQuery.of(context).size.width * 0.06,
+                      top: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    child: Text(
+                      'Senenin ilk etkinliği olan NASA Space Apps Hackhathonunda yer almak istersen tıkla!',
+                      style: GoogleFonts.poppins(
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white.withOpacity(0.8),
+                      ),
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * 0.06,
+                      vertical: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        fixedSize: Size(
+                          MediaQuery.of(context).size.width * 0.8,
+                          MediaQuery.of(context).size.height * 0.08,
+                        ),
+                        backgroundColor: const Color(0xff0b3d91),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            FontAwesomeIcons.rocket,
+                            color: Colors.white,
+                          ),
+                          const Spacer(),
+                          Text(
+                            "NASA Space Apps Hackathon'a Katıl",
+                            style: GoogleFonts.poppins(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.032,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      onPressed: () async {
+                        try {
+                          bool launched =
+                              // ignore: deprecated_member_use
+                              await launch(
+                            'https://www.instagram.com/spaceappsbursa/',
+                            forceSafariVC: false,
+                          );
+
+                          if (!launched) {
+                            // ignore: deprecated_member_use
+                            launch('https://www.instagram.com/spaceappsbursa/');
+                          }
+                        } catch (e) {
+                          // ignore: deprecated_member_use
+                          launch('https://www.instagram.com/spaceappsbursa/');
+                        }
+                      },
                     ),
                   ),
                 ),

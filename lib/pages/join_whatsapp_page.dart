@@ -37,7 +37,6 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController studentNumberController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController departmentController = TextEditingController();
   TextEditingController githubUsernameController = TextEditingController();
 
   List<String> developmentDurationList = [
@@ -111,6 +110,7 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                 style: GoogleFonts.poppins(
                   color: Colors.black.withOpacity(0.8),
                   fontWeight: FontWeight.w500,
+                  fontSize: MediaQuery.of(context).size.width * 0.05,
                 ),
               ),
               leading: BackButton(
@@ -520,14 +520,14 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                       if (nameController.text.isEmpty) {
                         Toast.showErrorToast(
                           context,
-                          message: 'İsim boş bırakılamaz',
+                          message: 'İsim boş bırakılamaz.',
                         );
                         return;
                       }
-                      if (nameController.text.length < 2) {
+                      if (nameController.text.length < 3) {
                         Toast.showErrorToast(
                           context,
-                          message: 'İsim en az 2 karakter olmalıdır.',
+                          message: 'İsim en az 3 karakter olmalı.',
                         );
                         return;
                       }
@@ -541,7 +541,7 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                       if (studentNumberController.text.length != 9) {
                         Toast.showErrorToast(
                           context,
-                          message: 'Öğrenci numarası 9 haneli olmalıdır.',
+                          message: 'Öğrenci numarası 9 haneli olmalı.',
                         );
                         return;
                       }
@@ -555,7 +555,7 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                       if (phoneNumberController.text.length != 12) {
                         Toast.showErrorToast(
                           context,
-                          message: 'Telefon numarası 10 haneli olmalıdır.',
+                          message: 'Telefon numarası 10 haneli olmalı.',
                         );
                         return;
                       }
@@ -563,7 +563,7 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                           selectedFaculty.isEmpty) {
                         Toast.showErrorToast(
                           context,
-                          message: 'Fakülte seçmelisiniz.',
+                          message: 'Fakülte seçmelisin.',
                         );
                         return;
                       }
@@ -571,7 +571,7 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                           selectedDepartment.isEmpty) {
                         Toast.showErrorToast(
                           context,
-                          message: 'Bölüm seçmelisiniz.',
+                          message: 'Bölüm seçmelisin.',
                         );
                         return;
                       }
@@ -579,7 +579,7 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                           selectedGrade.isEmpty) {
                         Toast.showErrorToast(
                           context,
-                          message: 'Sınıf seçmelisiniz.',
+                          message: 'Sınıf seçmelisin.',
                         );
                         return;
                       }
@@ -587,7 +587,7 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                           selectedSoftwareInfoPoint.isEmpty) {
                         Toast.showErrorToast(
                           context,
-                          message: 'Yazılım bilginizi puanlamalısınız.',
+                          message: 'Yazılım bilginizi puanlamalısın.',
                         );
                         return;
                       }
@@ -595,7 +595,7 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                           selectedDevelopmentDuration.isEmpty) {
                         Toast.showErrorToast(
                           context,
-                          message: 'Ne kadardır kod yazdığınızı seçmelisiniz.',
+                          message: 'Ne kadardır kod yazdığınızı seçmelisin.',
                         );
                         return;
                       }
@@ -1073,6 +1073,38 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
               ),
             )
           ],
+        );
+      } else {
+        await FirestoreService().whatsappGrubuKatilmaTalebiOlustur(
+          adiSoyadi: nameController.text,
+          ogrenciNo: studentNumberController.text,
+          telefonNumarasi: phoneNumberController.text,
+          fakulte: selectedFaculty,
+          bolum: selectedDepartment,
+          sinif: selectedGrade,
+          yazilimBilgisiPuani: selectedSoftwareInfoPoint,
+          yazilimSuresi: selectedDevelopmentDuration,
+          ilgilendigiAlanlar: selectedDevelopmentAreas,
+          githubKullaniciAdi: githubUsernameController.text,
+        );
+        setState(() {
+          isLoading = false;
+        });
+
+        Toast.showSuccesToast(
+          context,
+          'Başvurunuz alınmıştır. En kısa Whatsapp grubuna ekleneceksiniz.',
+        );
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Responsive(
+              mobileView: const MainPageMobile(),
+              tabView: const MainPageTab(),
+              webView: const MainPageDesktop(),
+            ),
+          ),
+          (route) => false,
         );
       }
     } catch (e) {

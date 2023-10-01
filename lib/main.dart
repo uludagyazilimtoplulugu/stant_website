@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yazilim_toplulugu/firebase_options.dart';
-import 'package:yazilim_toplulugu/pages/main_page/main_page.dart';
 import 'package:yazilim_toplulugu/pages/main_page/desktop.dart';
+import 'package:yazilim_toplulugu/pages/main_page/main_page.dart';
 import 'package:yazilim_toplulugu/pages/main_page/mobile.dart';
 import 'package:yazilim_toplulugu/pages/main_page/tab.dart';
 

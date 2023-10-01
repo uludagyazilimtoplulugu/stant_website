@@ -53,4 +53,72 @@ class FirestoreService {
       rethrow;
     }
   }
+
+  Future<void> egitimTalebiOlustur({
+    required String adiSoyadi,
+    required String fakulte,
+    required String bolum,
+    required String sinif,
+    required List<String> istedigiKonular,
+    required String eklemekIstedigiAlan,
+  }) async {
+    // day.month.year saat:dakika
+    String date =
+        "${zaman.day}.${zaman.month}.${zaman.year}_${zaman.hour}:${zaman.minute}";
+    try {
+      await firestore
+          .collection('egitimTalepleri')
+          .doc("${adiSoyadi}_$date")
+          .set({
+        'adiSoyadi': adiSoyadi,
+        'fakulte': fakulte,
+        'bolum': bolum,
+        'sinif': sinif,
+        'istedigiKonular': istedigiKonular,
+        'olusturulmaZamani': zaman,
+        'eklemekIstedigiAlan': eklemekIstedigiAlan,
+      });
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future getKatilmaTalepleriAdveTelefon() async {
+    // return list as [
+    //   ['Name', 'Phone'],
+    //   ['John', '555-1234'],
+    //   ['Jane', '555-5678'],
+    // ]
+    try {
+      final QuerySnapshot querySnapshot =
+          await firestore.collection('whatsappGrubuKatilmaTalepleri').get();
+      final List<List<String>> rows = [
+        ['Name', 'Phone'],
+      ];
+      for (var element in querySnapshot.docs) {
+        rows.add([element['adiSoyadi'], element['telefonNumarasi']]);
+      }
+      return rows;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  //get whatsappGrubuKatilmaTalepleri as querysnapshot
+  Future<QuerySnapshot> get whatsappGrubuKatilmaTalepleri async {
+    try {
+      return await firestore.collection('whatsappGrubuKatilmaTalepleri').get();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  //get whatsappGrubuKatilmaTalepleri as querysnapshot
+  Future<QuerySnapshot> get egitimTalepleri async {
+    try {
+      return await firestore.collection('egitimTalepleri').get();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

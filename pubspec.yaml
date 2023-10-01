@@ -50,6 +50,8 @@ dependencies:
   direct_select_flutter: ^1.1.1
   multi_select_flutter: ^4.1.3
   toastification: ^0.0.3
+  syncfusion_flutter_xlsio: ^23.1.38
+  csv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
