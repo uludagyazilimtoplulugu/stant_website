@@ -205,7 +205,6 @@ class _EgitimAnketiPageState extends ConsumerState<EgitimAnketiPage> {
                             ),
                             selectedColor: CustomColors.primaryColor,
                             // unselectedColor: Colors.white,
-
                             listType: MultiSelectListType.CHIP,
                             searchable: true,
                             buttonText: Text(

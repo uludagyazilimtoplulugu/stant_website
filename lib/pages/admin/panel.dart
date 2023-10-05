@@ -6,6 +6,7 @@ import 'package:yazilim_toplulugu/helpers/extensions.dart';
 import 'package:yazilim_toplulugu/models/admin.dart';
 import 'package:yazilim_toplulugu/pages/admin/bugun_katilanlar.dart';
 import 'package:yazilim_toplulugu/pages/admin/egitim_talepleri.dart';
+import 'package:yazilim_toplulugu/pages/admin/statistics.dart';
 import 'package:yazilim_toplulugu/pages/admin/tum_katilimcilar.dart';
 import 'package:yazilim_toplulugu/pages/admin/whatsapp_talepleri.dart';
 import 'package:yazilim_toplulugu/utils/colors.dart';
@@ -25,6 +26,7 @@ class _AdminPaneliPageState extends ConsumerState<AdminPaneliPage> {
     return Scaffold(
       backgroundColor: const Color(0xFFf5f5f5),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: const Color(0xFFf5f5f5),
         title: Text(
           'Selam ${widget.admin.name}',
@@ -124,16 +126,10 @@ class _AdminPaneliPageState extends ConsumerState<AdminPaneliPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  // show snackbar
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: CustomColors.primaryColor,
-                      content: Text(
-                        'Bu özellik henüz aktif değil.',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                        ),
-                      ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const IstatistiklerPage(),
                     ),
                   );
                 },

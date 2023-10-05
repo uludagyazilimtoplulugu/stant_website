@@ -114,7 +114,7 @@ class _WhatsappTalepleriPageState extends ConsumerState<WhatsappTalepleriPage> {
                           setState(() {});
                         },
                         child: Text(
-                          'Tümünü Seç',
+                          'Tümünü Seç (${talepler.length})',
                           style: GoogleFonts.poppins(
                             color: Colors.black.withOpacity(0.7),
                             fontWeight: FontWeight.w600,

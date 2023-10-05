@@ -5,17 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/formatters/phone_input_formatter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_select_flutter/bottom_sheet/multi_select_bottom_sheet_field.dart';
 import 'package:multi_select_flutter/chip_display/multi_select_chip_display.dart';
 import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:yazilim_toplulugu/helpers/departments.dart';
-import 'package:yazilim_toplulugu/helpers/dialogs.dart';
 import 'package:yazilim_toplulugu/helpers/extensions.dart';
 import 'package:yazilim_toplulugu/helpers/toast.dart';
-import 'package:yazilim_toplulugu/main.dart';
 import 'package:yazilim_toplulugu/pages/main_page/desktop.dart';
 import 'package:yazilim_toplulugu/pages/main_page/main_page.dart';
 import 'package:yazilim_toplulugu/pages/main_page/mobile.dart';
@@ -1159,145 +1156,145 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
       setState(() {
         isLoading = true;
       });
-      bool katilmaTalebiOlusturmusMu =
-          await FirestoreService().whatsappKatilmaTalebiOlusturmusMu(
+      // bool katilmaTalebiOlusturmusMu =
+      //     await FirestoreService().whatsappKatilmaTalebiOlusturmusMu(
+      //   ogrenciNo: studentNumberController.text,
+      // );
+      // if (katilmaTalebiOlusturmusMu) {
+      //   setState(() {
+      //     isLoading = false;
+      //   });
+      //   UIHelpers.getCustomDialog(
+      //     icon: FontAwesomeIcons.triangleExclamation,
+      //     iconColor: CustomColors.primaryColor,
+      //     title: 'Uyarı',
+      //     subtitle:
+      //         'Bu öğrenci numarası ile daha önce başvuru yapılmış. Eğer devam ederseniz doldurduğunuz bilgiler eski başvurunuzun üzerine yazılacak. Devam etmek istiyor musunuz?',
+      //     buttons: [
+      //       Padding(
+      //         padding: const EdgeInsets.all(8.0),
+      //         child: ElevatedButton(
+      //           style: ElevatedButton.styleFrom(
+      //             backgroundColor: CustomColors.primaryColor,
+      //             shape: RoundedRectangleBorder(
+      //               borderRadius: BorderRadius.circular(12),
+      //             ),
+      //             fixedSize: Size(
+      //               MediaQuery.of(context).size.width * 0.65,
+      //               MediaQuery.of(context).size.height * 0.06,
+      //             ),
+      //           ),
+      //           onPressed: () async {
+      //             await FirestoreService().whatsappGrubuKatilmaTalebiOlustur(
+      //               adiSoyadi: nameController.text,
+      //               ogrenciNo: studentNumberController.text,
+      //               telefonNumarasi: phoneNumberController.text,
+      //               fakulte: selectedFaculty,
+      //               bolum: selectedDepartment,
+      //               sinif: selectedGrade,
+      //               yazilimBilgisiPuani: selectedSoftwareInfoPoint,
+      //               yazilimSuresi: selectedDevelopmentDuration.isEmpty
+      //                   ? ''
+      //                   : selectedDevelopmentDuration,
+      //               ilgilendigiAlanlar: selectedDevelopmentAreas,
+      //               githubKullaniciAdi: githubUsernameController.text.isEmpty
+      //                   ? ''
+      //                   : githubUsernameController.text,
+      //             );
+      //             setState(() {
+      //               isLoading = false;
+      //             });
+
+      //             Toast.showSuccesToast(
+      //               context,
+      //               'Başvurunuz alınmıştır. En kısa zamanda Whatsapp grubuna ekleneceksiniz.',
+      //               seconds: 5,
+      //             );
+      //             Navigator.pushAndRemoveUntil(
+      //               context,
+      //               MaterialPageRoute(
+      //                 builder: (context) => Responsive(
+      //                   mobileView: const MainPageMobile(),
+      //                   tabView: const MainPageTab(),
+      //                   webView: const MainPageDesktop(),
+      //                 ),
+      //               ),
+      //               (route) => false,
+      //             );
+      //           },
+      //           child: Text(
+      //             "Devam Et",
+      //             style: GoogleFonts.poppins(
+      //               fontSize: 17,
+      //               fontWeight: FontWeight.w600,
+      //               color: Colors.white,
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //       Padding(
+      //         padding: const EdgeInsets.all(8.0),
+      //         child: ElevatedButton(
+      //           style: ElevatedButton.styleFrom(
+      //             backgroundColor: CustomColors.secondaryColor,
+      //             shape: RoundedRectangleBorder(
+      //               borderRadius: BorderRadius.circular(12),
+      //             ),
+      //             fixedSize: Size(
+      //               MediaQuery.of(context).size.width * 0.65,
+      //               MediaQuery.of(context).size.height * 0.06,
+      //             ),
+      //           ),
+      //           onPressed: () {
+      //             Navigator.pop(
+      //                 GlobalcontextService.navigatorKey.currentContext!);
+      //           },
+      //           child: Text(
+      //             "Vazgeç",
+      //             style: GoogleFonts.poppins(
+      //               fontSize: 17,
+      //               fontWeight: FontWeight.w600,
+      //               color: Colors.white,
+      //             ),
+      //           ),
+      //         ),
+      //       )
+      //     ],
+      //   );
+      // } else {
+      await FirestoreService().whatsappGrubuKatilmaTalebiOlustur(
+        adiSoyadi: nameController.text,
         ogrenciNo: studentNumberController.text,
+        telefonNumarasi: phoneNumberController.text,
+        fakulte: selectedFaculty,
+        bolum: selectedDepartment,
+        sinif: selectedGrade,
+        yazilimBilgisiPuani: selectedSoftwareInfoPoint,
+        yazilimSuresi: selectedDevelopmentDuration,
+        ilgilendigiAlanlar:
+            selectedDevelopmentAreas.isEmpty ? [] : selectedDevelopmentAreas,
+        githubKullaniciAdi: githubUsernameController.text,
       );
-      if (katilmaTalebiOlusturmusMu) {
-        setState(() {
-          isLoading = false;
-        });
-        UIHelpers.getCustomDialog(
-          icon: FontAwesomeIcons.triangleExclamation,
-          iconColor: CustomColors.primaryColor,
-          title: 'Uyarı',
-          subtitle:
-              'Bu öğrenci numarası ile daha önce başvuru yapılmış. Eğer devam ederseniz doldurduğunuz bilgiler eski başvurunuzun üzerine yazılacak. Devam etmek istiyor musunuz?',
-          buttons: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: CustomColors.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  fixedSize: Size(
-                    MediaQuery.of(context).size.width * 0.65,
-                    MediaQuery.of(context).size.height * 0.06,
-                  ),
-                ),
-                onPressed: () async {
-                  await FirestoreService().whatsappGrubuKatilmaTalebiOlustur(
-                    adiSoyadi: nameController.text,
-                    ogrenciNo: studentNumberController.text,
-                    telefonNumarasi: phoneNumberController.text,
-                    fakulte: selectedFaculty,
-                    bolum: selectedDepartment,
-                    sinif: selectedGrade,
-                    yazilimBilgisiPuani: selectedSoftwareInfoPoint,
-                    yazilimSuresi: selectedDevelopmentDuration.isEmpty
-                        ? ''
-                        : selectedDevelopmentDuration,
-                    ilgilendigiAlanlar: selectedDevelopmentAreas,
-                    githubKullaniciAdi: githubUsernameController.text.isEmpty
-                        ? ''
-                        : githubUsernameController.text,
-                  );
-                  setState(() {
-                    isLoading = false;
-                  });
+      setState(() {
+        isLoading = false;
+      });
 
-                  Toast.showSuccesToast(
-                    context,
-                    'Başvurunuz alınmıştır. En kısa zamanda Whatsapp grubuna ekleneceksiniz.',
-                    seconds: 5,
-                  );
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Responsive(
-                        mobileView: const MainPageMobile(),
-                        tabView: const MainPageTab(),
-                        webView: const MainPageDesktop(),
-                      ),
-                    ),
-                    (route) => false,
-                  );
-                },
-                child: Text(
-                  "Devam Et",
-                  style: GoogleFonts.poppins(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: CustomColors.secondaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  fixedSize: Size(
-                    MediaQuery.of(context).size.width * 0.65,
-                    MediaQuery.of(context).size.height * 0.06,
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.pop(
-                      GlobalcontextService.navigatorKey.currentContext!);
-                },
-                child: Text(
-                  "Vazgeç",
-                  style: GoogleFonts.poppins(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )
-          ],
-        );
-      } else {
-        await FirestoreService().whatsappGrubuKatilmaTalebiOlustur(
-          adiSoyadi: nameController.text,
-          ogrenciNo: studentNumberController.text,
-          telefonNumarasi: phoneNumberController.text,
-          fakulte: selectedFaculty,
-          bolum: selectedDepartment,
-          sinif: selectedGrade,
-          yazilimBilgisiPuani: selectedSoftwareInfoPoint,
-          yazilimSuresi: selectedDevelopmentDuration,
-          ilgilendigiAlanlar:
-              selectedDevelopmentAreas.isEmpty ? [] : selectedDevelopmentAreas,
-          githubKullaniciAdi: githubUsernameController.text,
-        );
-        setState(() {
-          isLoading = false;
-        });
-
-        Toast.showSuccesToast(
-          context,
-          'Başvurunuz alınmıştır. En kısa Whatsapp grubuna ekleneceksiniz.',
-        );
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Responsive(
-              mobileView: const MainPageMobile(),
-              tabView: const MainPageTab(),
-              webView: const MainPageDesktop(),
-            ),
+      Toast.showSuccesToast(
+        context,
+        'Başvurunuz alınmıştır. En kısa Whatsapp grubuna ekleneceksiniz.',
+      );
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Responsive(
+            mobileView: const MainPageMobile(),
+            tabView: const MainPageTab(),
+            webView: const MainPageDesktop(),
           ),
-          (route) => false,
-        );
-      }
+        ),
+        (route) => false,
+      );
+      // }
     } catch (e) {
       debugPrint("hata");
       debugPrint(e.toString());
