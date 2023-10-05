@@ -37,7 +37,7 @@ class _BugunKatilanlarPageState extends ConsumerState<BugunKatilanlarPage> {
                     // ]
                     for (var element in secilenTalepler) {
                       list.add([
-                        element.adiSoyadi.toString(),
+                        "TEMP-${element.adiSoyadi}",
                         element.telefonNumarasi.toString()
                       ]);
                     }
@@ -139,7 +139,7 @@ class _BugunKatilanlarPageState extends ConsumerState<BugunKatilanlarPage> {
                           setState(() {});
                         },
                         child: Text(
-                          'Tümünü Seç',
+                          'Tümünü Seç (${bugunkuTalepler.length})',
                           style: GoogleFonts.poppins(
                             color: Colors.black.withOpacity(0.7),
                             fontWeight: FontWeight.w600,

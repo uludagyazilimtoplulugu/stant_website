@@ -39,11 +39,7 @@ class MyApp extends StatelessWidget {
       },
       debugShowCheckedModeBanner: false,
       title: 'Yazılım Topluluğu',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        primaryColor: Colors.blueGrey,
-        useMaterial3: true,
-      ),
+      theme: ThemeData.light(),
       home: Responsive(
         mobileView: const MainPageMobile(),
         tabView: const MainPageTab(),

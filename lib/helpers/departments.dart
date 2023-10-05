@@ -14,7 +14,7 @@ class DepartmentListsHelper {
     "Güzel Sanatlar Fakültesi",
     "İnegöl İşletme Fakültesi",
     "Mimarlık Fakültesi",
-    "Sağlık Bilmleri Fakültesi",
+    "Sağlık Bilimleri Fakültesi",
     "Diş Hekimliği Fakültesi",
   ];
 

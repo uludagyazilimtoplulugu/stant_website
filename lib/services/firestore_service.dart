@@ -56,9 +56,6 @@ class FirestoreService {
 
   Future<void> egitimTalebiOlustur({
     required String adiSoyadi,
-    required String fakulte,
-    required String bolum,
-    required String sinif,
     required List<String> istedigiKonular,
     required String eklemekIstedigiAlan,
   }) async {
@@ -71,9 +68,9 @@ class FirestoreService {
           .doc("${adiSoyadi}_$date")
           .set({
         'adiSoyadi': adiSoyadi,
-        'fakulte': fakulte,
-        'bolum': bolum,
-        'sinif': sinif,
+        'fakulte': '',
+        'bolum': '',
+        'sinif': '',
         'istedigiKonular': istedigiKonular,
         'olusturulmaZamani': zaman,
         'eklemekIstedigiAlan': eklemekIstedigiAlan,

@@ -1,8 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:direct_select_flutter/direct_select_container.dart';
 import 'package:direct_select_flutter/direct_select_item.dart';
-import 'package:direct_select_flutter/direct_select_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/formatters/phone_input_formatter.dart';
@@ -39,8 +37,15 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController githubUsernameController = TextEditingController();
 
+  ExpansionTileController facultyTileController = ExpansionTileController();
+  ExpansionTileController departmentTileController = ExpansionTileController();
+  ExpansionTileController gradeTileController = ExpansionTileController();
+  ExpansionTileController developmentDurationTileController =
+      ExpansionTileController();
+  ExpansionTileController developmentPointTileController =
+      ExpansionTileController();
+
   List<String> developmentDurationList = [
-    'Seç',
     'Hiç kod yazmadım',
     '0-1 Yıl',
     '1-3 Yıl',
@@ -50,7 +55,6 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
   ];
 
   List<String> grades = [
-    'Sınıfını Seç',
     'Hazırlık',
     '1. Sınıf',
     '2. Sınıf',
@@ -75,7 +79,7 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
     'Blockchain',
     'Siber Güvenlik',
     'Yapay Zeka',
-    'Prompt Mühendisliği',
+    'Prompt Mühendisliği (GPT)',
     'Veri Bilimi',
     'Gömülü Sistemler',
     'Robotik',
@@ -85,26 +89,37 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
     'Henüz İlgi Duyduğuğum Alan Yok',
   ];
 
+  List<String> softwareInfoPoints = [
+    'Hiç kod yazmadım',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+  ];
+
   String selectedFaculty = "";
   String selectedDepartment = "";
   String selectedGrade = "";
   String selectedSoftwareInfoPoint = "";
   String selectedDevelopmentDuration = "";
-  int facultyIndex = 0;
-  int departmentIndex = 0;
-  int gradeIndex = 0;
-  int softwareInfoIndex = 0;
-  int developmentDurationIndex = 0;
 
   bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        DirectSelectContainer(
-          child: Scaffold(
+    return WillPopScope(
+      // false
+      onWillPop: () async {
+        return false;
+      },
+      child: Stack(
+        children: [
+          Scaffold(
             appBar: AppBar(
+              centerTitle: true,
+              elevation: 0,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               title: Text(
                 'Whatsapp Grubuna Katıl',
                 style: GoogleFonts.poppins(
@@ -157,18 +172,20 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                             filled: true,
                             fillColor: isNameTapped
                                 ? CustomColors.primaryColor.withOpacity(0.2)
-                                : Colors.blueGrey[50],
+                                : CustomColors.primaryColor.withOpacity(0.1),
                             labelStyle: GoogleFonts.poppins(fontSize: 12),
                             contentPadding: const EdgeInsets.only(left: 30),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Colors.blueGrey[50]!,
+                                color:
+                                    CustomColors.primaryColor.withOpacity(0.1),
                               ),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Colors.blueGrey[50]!,
+                                color:
+                                    CustomColors.primaryColor.withOpacity(0.1),
                               ),
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -218,18 +235,20 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                             filled: true,
                             fillColor: isOgrenciNumarasiTapped
                                 ? CustomColors.primaryColor.withOpacity(0.2)
-                                : Colors.blueGrey[50],
+                                : CustomColors.primaryColor.withOpacity(0.1),
                             labelStyle: GoogleFonts.poppins(fontSize: 12),
                             contentPadding: const EdgeInsets.only(left: 30),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Colors.blueGrey[50]!,
+                                color:
+                                    CustomColors.primaryColor.withOpacity(0.1),
                               ),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Colors.blueGrey[50]!,
+                                color:
+                                    CustomColors.primaryColor.withOpacity(0.1),
                               ),
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -283,18 +302,20 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                             filled: true,
                             fillColor: isGithubUsernameTapped
                                 ? CustomColors.primaryColor.withOpacity(0.2)
-                                : Colors.blueGrey[50],
+                                : CustomColors.primaryColor.withOpacity(0.1),
                             labelStyle: GoogleFonts.poppins(fontSize: 12),
                             contentPadding: const EdgeInsets.only(left: 30),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Colors.blueGrey[50]!,
+                                color:
+                                    CustomColors.primaryColor.withOpacity(0.1),
                               ),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Colors.blueGrey[50]!,
+                                color:
+                                    CustomColors.primaryColor.withOpacity(0.1),
                               ),
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -338,11 +359,11 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                   ),
                   Extensions.boslukHeight(context, 0.03),
                   selectedSoftwareInfoPoint.isNotEmpty &&
-                          selectedSoftwareInfoPoint != 'Puanla' &&
-                          int.parse(selectedSoftwareInfoPoint) != 0
+                          selectedSoftwareInfoPoint != 'Hiç kod yazmadım' &&
+                          int.parse(selectedSoftwareInfoPoint) > 1
                       ? Column(
                           children: [
-                            title('Github Kullanıcı Adın'),
+                            title('Github Kullanıcı Adın (Opsiyonel)'),
                             Extensions.boslukHeight(context, 0.01),
                             Row(
                               children: [
@@ -377,20 +398,23 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                                       fillColor: isGithubUsernameTapped
                                           ? CustomColors.primaryColor
                                               .withOpacity(0.2)
-                                          : Colors.blueGrey[50],
+                                          : CustomColors.primaryColor
+                                              .withOpacity(0.1),
                                       labelStyle:
                                           GoogleFonts.poppins(fontSize: 12),
                                       contentPadding:
                                           const EdgeInsets.only(left: 30),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Colors.blueGrey[50]!,
+                                          color: CustomColors.primaryColor
+                                              .withOpacity(0.1),
                                         ),
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Colors.blueGrey[50]!,
+                                          color: CustomColors.primaryColor
+                                              .withOpacity(0.1),
                                         ),
                                         borderRadius: BorderRadius.circular(12),
                                       ),
@@ -412,7 +436,8 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                     ],
                   ),
                   Extensions.boslukHeight(context, 0.03),
-                  title('İlgi duyduğun alan var mı, varsa hangileri?'),
+                  title(
+                      'İlgi duyduğun alan var mı, varsa hangileri? (Opsiyonel)'),
                   Extensions.boslukHeight(context, 0.01),
                   Row(
                     children: [
@@ -459,7 +484,8 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                             color: Colors.black.withOpacity(0.6),
                           ),
                           selectedColor: CustomColors.primaryColor,
-                          unselectedColor: Colors.white,
+                          // unselectedColor: Colors.white,
+
                           listType: MultiSelectListType.CHIP,
                           searchable: true,
                           buttonText: Text(
@@ -591,14 +617,14 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                         );
                         return;
                       }
-                      if (selectedDevelopmentDuration == 'Seç' ||
-                          selectedDevelopmentDuration.isEmpty) {
-                        Toast.showErrorToast(
-                          context,
-                          message: 'Ne kadardır kod yazdığınızı seçmelisin.',
-                        );
-                        return;
-                      }
+                      // if (selectedDevelopmentDuration == 'Seç' ||
+                      //     selectedDevelopmentDuration.isEmpty) {
+                      //   Toast.showErrorToast(
+                      //     context,
+                      //     message: 'Ne kadardır kod yazdığınızı seçmelisin.',
+                      //   );
+                      //   return;
+                      // }
                       // if (selectedDevelopmentAreas.isEmpty) {
                       //   Toast.showErrorToast(
                       //     context,
@@ -606,16 +632,16 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                       //   );
                       //   return;
                       // }
-                      if (selectedSoftwareInfoPoint.isNotEmpty &&
-                          selectedSoftwareInfoPoint != 'Puanla' &&
-                          int.parse(selectedSoftwareInfoPoint) != 0 &&
-                          githubUsernameController.text.isEmpty) {
-                        Toast.showErrorToast(
-                          context,
-                          message: 'Github kullanıcı adı boş bırakılamaz.',
-                        );
-                        return;
-                      }
+                      // if (selectedSoftwareInfoPoint.isNotEmpty &&
+                      //     selectedSoftwareInfoPoint != 'Puanla' &&
+                      //     int.parse(selectedSoftwareInfoPoint) != 0 &&
+                      //     githubUsernameController.text.isEmpty) {
+                      //   Toast.showErrorToast(
+                      //     context,
+                      //     message: 'Github kullanıcı adı boş bırakılamaz.',
+                      //   );
+                      //   return;
+                      // }
                       saveValues();
                     },
                     child: Text(
@@ -632,20 +658,20 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
               ),
             ),
           ),
-        ),
-        isLoading
-            ? Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                color: Colors.black.withOpacity(0.5),
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
+          isLoading
+              ? Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  color: Colors.black.withOpacity(0.5),
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              )
-            : const SizedBox(),
-      ],
+                )
+              : const SizedBox(),
+        ],
+      ),
     );
   }
 
@@ -681,44 +707,111 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
           ),
         ),
         Extensions.boslukHeight(context, 0.002),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-          child: Card(
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 12),
-                    child: DirectSelectList<String>(
-                      onItemSelectedListener: (value, selectedIndex, context) {
-                        debugPrint(value);
-                        setState(() {
-                          facultyIndex = selectedIndex;
-                          selectedFaculty = value;
-                          departmentIndex = 0;
-                          selectedDepartment =
-                              DepartmentListsHelper.getDepartmentData(
-                                      selectedFaculty)
-                                  .first;
-                        });
+        // Padding(
+        //   padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+        //   child: Card(
+        //     child: Row(
+        //       mainAxisSize: MainAxisSize.max,
+        //       children: <Widget>[
+        //         Expanded(
+        //           child: Padding(
+        //             padding: const EdgeInsets.only(left: 12),
+        //             child: DirectSelectList<String>(
+        //               onItemSelectedListener: (value, selectedIndex, context) {
+        //                 debugPrint(value);
+        //                 setState(() {
+        //                   facultyIndex = selectedIndex;
+        //                   selectedFaculty = value;
+        //                   departmentIndex = 0;
+        //                   selectedDepartment =
+        //                       DepartmentListsHelper.getDepartmentData(
+        //                               selectedFaculty)
+        //                           .first;
+        //                 });
+        //               },
+        //               onUserTappedListener: () => _showScaffold(),
+        //               values: DepartmentListsHelper.fakulteler,
+        //               defaultItemIndex: facultyIndex,
+        //               itemBuilder: (String value) => getDropDownMenuItem(value),
+        //               focusedItemDecoration: _getDslDecoration(),
+        //             ),
+        //           ),
+        //         ),
+        //         Padding(
+        //           padding: const EdgeInsets.only(right: 8),
+        //           child: _getDropdownIcon(),
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: CustomColors.primaryColor.withOpacity(0.1),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ExpansionTile(
+                controller: facultyTileController,
+                title: selectedFaculty.isEmpty
+                    ? Text(
+                        'Seç',
+                        style: GoogleFonts.poppins(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    : Text(
+                        selectedFaculty,
+                        style: GoogleFonts.poppins(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: DepartmentListsHelper.fakulteler.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            DepartmentListsHelper.fakulteler[index],
+                            style: GoogleFonts.poppins(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              selectedFaculty =
+                                  DepartmentListsHelper.fakulteler[index];
+
+                              selectedDepartment =
+                                  DepartmentListsHelper.getDepartmentData(
+                                          selectedFaculty)
+                                      .first;
+                              facultyTileController.collapse();
+                            });
+                          },
+                        );
                       },
-                      onUserTappedListener: () => _showScaffold(),
-                      values: DepartmentListsHelper.fakulteler,
-                      defaultItemIndex: facultyIndex,
-                      itemBuilder: (String value) => getDropDownMenuItem(value),
-                      focusedItemDecoration: _getDslDecoration(),
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          color: Colors.grey.withOpacity(0.5),
+                        );
+                      },
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: _getDropdownIcon(),
-                )
-              ],
-            ),
+                ]),
           ),
-        ),
+        )
       ],
     );
   }
@@ -736,38 +829,74 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
           ),
         ),
         Extensions.boslukHeight(context, 0.002),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-          child: Card(
-              child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 12),
-                  child: DirectSelectList<String>(
-                    onItemSelectedListener: (value, selectedIndex, context) {
-                      setState(() {
-                        selectedDepartment = value;
-                        departmentIndex = selectedIndex;
-                      });
-                    },
-                    onUserTappedListener: () => _showScaffold(),
-                    values: DepartmentListsHelper.getDepartmentData(
-                        selectedFaculty),
-                    defaultItemIndex: departmentIndex,
-                    itemBuilder: (String value) => getDropDownMenuItem(value),
-                    focusedItemDecoration: _getDslDecoration(),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: CustomColors.primaryColor.withOpacity(0.1),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ExpansionTile(
+                controller: departmentTileController,
+                title: selectedDepartment.isEmpty
+                    ? Text(
+                        'Seç',
+                        style: GoogleFonts.poppins(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    : Text(
+                        selectedDepartment,
+                        style: GoogleFonts.poppins(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: DepartmentListsHelper.getDepartmentData(
+                              selectedFaculty)
+                          .length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            DepartmentListsHelper.getDepartmentData(
+                                    selectedFaculty)[index]
+                                .toString(),
+                            style: GoogleFonts.poppins(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              selectedDepartment =
+                                  DepartmentListsHelper.getDepartmentData(
+                                          selectedFaculty)[index]
+                                      .toString();
+                              departmentTileController.collapse();
+                            });
+                          },
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          color: Colors.grey.withOpacity(0.5),
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: _getDropdownIcon(),
-              )
-            ],
-          )),
-        ),
+                ]),
+          ),
+        )
       ],
     );
   }
@@ -785,39 +914,67 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
           ),
         ),
         Extensions.boslukHeight(context, 0.002),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-          child: Card(
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 12),
-                    child: DirectSelectList<String>(
-                      onItemSelectedListener: (value, selectedIndex, context) {
-                        debugPrint(value);
-                        setState(() {
-                          gradeIndex = selectedIndex;
-                          selectedGrade = value;
-                        });
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: CustomColors.primaryColor.withOpacity(0.1),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ExpansionTile(
+                controller: gradeTileController,
+                title: selectedGrade.isEmpty
+                    ? Text(
+                        'Seç',
+                        style: GoogleFonts.poppins(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    : Text(
+                        selectedGrade,
+                        style: GoogleFonts.poppins(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: grades.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            grades[index].toString(),
+                            style: GoogleFonts.poppins(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              selectedGrade = grades[index].toString();
+                              gradeTileController.collapse();
+                            });
+                          },
+                        );
                       },
-                      onUserTappedListener: () => _showScaffold(),
-                      values: grades,
-                      defaultItemIndex: gradeIndex,
-                      itemBuilder: (String value) => getDropDownMenuItem(value),
-                      focusedItemDecoration: _getDslDecoration(),
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          color: Colors.grey.withOpacity(0.5),
+                        );
+                      },
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: _getDropdownIcon(),
-                )
-              ],
-            ),
+                ]),
           ),
-        ),
+        )
       ],
     );
   }
@@ -835,39 +992,68 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
           ),
         ),
         Extensions.boslukHeight(context, 0.002),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-          child: Card(
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 12),
-                    child: DirectSelectList<String>(
-                      onItemSelectedListener: (value, selectedIndex, context) {
-                        debugPrint(value);
-                        setState(() {
-                          softwareInfoIndex = selectedIndex;
-                          selectedSoftwareInfoPoint = value;
-                        });
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: CustomColors.primaryColor.withOpacity(0.1),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ExpansionTile(
+                controller: developmentPointTileController,
+                title: selectedSoftwareInfoPoint.isEmpty
+                    ? Text(
+                        'Seç',
+                        style: GoogleFonts.poppins(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    : Text(
+                        selectedSoftwareInfoPoint,
+                        style: GoogleFonts.poppins(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: softwareInfoPoints.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            softwareInfoPoints[index].toString(),
+                            style: GoogleFonts.poppins(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              selectedSoftwareInfoPoint =
+                                  softwareInfoPoints[index].toString();
+                              developmentPointTileController.collapse();
+                            });
+                          },
+                        );
                       },
-                      onUserTappedListener: () => _showScaffold(),
-                      values: const ['Puanla', '0', '1', '2', '3', '4', '5'],
-                      defaultItemIndex: softwareInfoIndex,
-                      itemBuilder: (String value) => getDropDownMenuItem(value),
-                      focusedItemDecoration: _getDslDecoration(),
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          color: Colors.grey.withOpacity(0.5),
+                        );
+                      },
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: _getDropdownIcon(),
-                )
-              ],
-            ),
+                ]),
           ),
-        ),
+        )
       ],
     );
   }
@@ -877,7 +1063,7 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Ne kadar süredir kodlama yapıyorsun?',
+          'Ne kadar süredir kodlama yapıyorsun? (Opsiyonel)',
           style: GoogleFonts.poppins(
             fontSize: MediaQuery.of(context).size.width * 0.04,
             color: Colors.black,
@@ -885,55 +1071,70 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
           ),
         ),
         Extensions.boslukHeight(context, 0.002),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-          child: Card(
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 12),
-                    child: DirectSelectList<String>(
-                      onItemSelectedListener: (value, selectedIndex, context) {
-                        debugPrint(value);
-                        setState(() {
-                          developmentDurationIndex = selectedIndex;
-                          selectedDevelopmentDuration = value;
-                        });
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: CustomColors.primaryColor.withOpacity(0.1),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ExpansionTile(
+                controller: developmentDurationTileController,
+                title: selectedDevelopmentDuration.isEmpty
+                    ? Text(
+                        'Seç',
+                        style: GoogleFonts.poppins(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    : Text(
+                        selectedDevelopmentDuration,
+                        style: GoogleFonts.poppins(
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: developmentDurationList.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            developmentDurationList[index].toString(),
+                            style: GoogleFonts.poppins(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              selectedDevelopmentDuration =
+                                  developmentDurationList[index].toString();
+                              developmentDurationTileController.collapse();
+                            });
+                          },
+                        );
                       },
-                      onUserTappedListener: () => _showScaffold(),
-                      values: developmentDurationList,
-                      defaultItemIndex: developmentDurationIndex,
-                      itemBuilder: (String value) => getDropDownMenuItem(value),
-                      focusedItemDecoration: _getDslDecoration(),
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          color: Colors.grey.withOpacity(0.5),
+                        );
+                      },
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: _getDropdownIcon(),
-                )
-              ],
-            ),
+                ]),
           ),
-        ),
+        )
       ],
     );
-  }
-
-  void _showScaffold() {
-    final snackBar = SnackBar(
-      //color
-      backgroundColor: CustomColors.primaryColor,
-      content: Text(
-        'Basılı tut ve parmağını sürükle',
-        style: GoogleFonts.poppins(
-          color: Colors.white,
-        ),
-      ),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   DirectSelectItem<String> getDropDownMenuItem(String value) {
@@ -950,22 +1151,6 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
           ),
         );
       },
-    );
-  }
-
-  _getDslDecoration() {
-    return const BoxDecoration(
-      border: BorderDirectional(
-        bottom: BorderSide(width: 1, color: Colors.black12),
-        top: BorderSide(width: 1, color: Colors.black12),
-      ),
-    );
-  }
-
-  Icon _getDropdownIcon() {
-    return const Icon(
-      Icons.unfold_more,
-      color: Colors.blueAccent,
     );
   }
 
@@ -1011,9 +1196,13 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
                     bolum: selectedDepartment,
                     sinif: selectedGrade,
                     yazilimBilgisiPuani: selectedSoftwareInfoPoint,
-                    yazilimSuresi: selectedDevelopmentDuration,
+                    yazilimSuresi: selectedDevelopmentDuration.isEmpty
+                        ? ''
+                        : selectedDevelopmentDuration,
                     ilgilendigiAlanlar: selectedDevelopmentAreas,
-                    githubKullaniciAdi: githubUsernameController.text,
+                    githubKullaniciAdi: githubUsernameController.text.isEmpty
+                        ? ''
+                        : githubUsernameController.text,
                   );
                   setState(() {
                     isLoading = false;
@@ -1021,7 +1210,8 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
 
                   Toast.showSuccesToast(
                     context,
-                    'Başvurunuz alınmıştır. En kısa Whatsapp grubuna ekleneceksiniz.',
+                    'Başvurunuz alınmıştır. En kısa zamanda Whatsapp grubuna ekleneceksiniz.',
+                    seconds: 5,
                   );
                   Navigator.pushAndRemoveUntil(
                     context,
@@ -1084,7 +1274,8 @@ class _JoinWhatsappPageState extends ConsumerState<JoinWhatsappPage> {
           sinif: selectedGrade,
           yazilimBilgisiPuani: selectedSoftwareInfoPoint,
           yazilimSuresi: selectedDevelopmentDuration,
-          ilgilendigiAlanlar: selectedDevelopmentAreas,
+          ilgilendigiAlanlar:
+              selectedDevelopmentAreas.isEmpty ? [] : selectedDevelopmentAreas,
           githubKullaniciAdi: githubUsernameController.text,
         );
         setState(() {
