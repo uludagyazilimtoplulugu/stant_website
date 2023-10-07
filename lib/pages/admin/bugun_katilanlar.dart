@@ -22,6 +22,12 @@ class _BugunKatilanlarPageState extends ConsumerState<BugunKatilanlarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        leading: BackButton(
+          color: Colors.black.withOpacity(0.7),
+        ),
         actions: [
           // download
           selectedOgrenciNo.isNotEmpty

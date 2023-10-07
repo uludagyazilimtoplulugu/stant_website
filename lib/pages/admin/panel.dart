@@ -26,6 +26,7 @@ class _AdminPaneliPageState extends ConsumerState<AdminPaneliPage> {
     return Scaffold(
       backgroundColor: const Color(0xFFf5f5f5),
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         backgroundColor: const Color(0xFFf5f5f5),
         title: Text(

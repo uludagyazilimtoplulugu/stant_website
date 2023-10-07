@@ -20,6 +20,7 @@ class _IstatistiklerPageState extends ConsumerState<IstatistiklerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          centerTitle: true,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           title: Text(
@@ -457,6 +458,14 @@ class _IstatistiklerPageState extends ConsumerState<IstatistiklerPage> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    Extensions.boslukHeight(context, 0.01),
+                    Text(
+                      'Toplam Kullanıcı Sayısı: ${talepler.length}',
+                      style: GoogleFonts.poppins(
+                        color: Colors.black.withOpacity(0.7),
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
 

@@ -20,6 +20,12 @@ class _TumKatilimcilarPageState extends ConsumerState<TumKatilimcilarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        leading: BackButton(
+          color: Colors.black.withOpacity(0.7),
+        ),
         title: Text(
           'Tüm Katılımcılar',
           style: GoogleFonts.poppins(

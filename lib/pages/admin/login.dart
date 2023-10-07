@@ -54,6 +54,7 @@ class _AdminLoginPageState extends ConsumerState<AdminLoginPage> {
         Scaffold(
           backgroundColor: const Color(0xFFf5f5f5),
           appBar: AppBar(
+            centerTitle: true,
             elevation: 0,
             title: Text(
               'Admin Girişi',
@@ -96,6 +97,7 @@ class _AdminLoginPageState extends ConsumerState<AdminLoginPage> {
         Scaffold(
           backgroundColor: const Color(0xFFf5f5f5),
           appBar: AppBar(
+            centerTitle: true,
             backgroundColor: const Color(0xFFf5f5f5),
             leading: const BackButton(
               color: Colors.black,

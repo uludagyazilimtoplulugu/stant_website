@@ -22,6 +22,12 @@ class _WhatsappTalepleriPageState extends ConsumerState<WhatsappTalepleriPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        leading: BackButton(
+          color: Colors.black.withOpacity(0.7),
+        ),
         actions: [
           // download
           selectedOgrenciNo.isNotEmpty
@@ -37,7 +43,7 @@ class _WhatsappTalepleriPageState extends ConsumerState<WhatsappTalepleriPage> {
                     // ]
                     for (var element in secilenTalepler) {
                       list.add([
-                        element.adiSoyadi.toString(),
+                        "TEMP-${element.adiSoyadi}",
                         element.telefonNumarasi.toString()
                       ]);
                     }

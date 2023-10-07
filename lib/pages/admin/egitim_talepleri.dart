@@ -18,6 +18,12 @@ class _EgitimTalepleriPageState extends ConsumerState<EgitimTalepleriPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        leading: BackButton(
+          color: Colors.black.withOpacity(0.7),
+        ),
         title: Text(
           'Eğitim Talepleri',
           style: GoogleFonts.poppins(
@@ -53,6 +59,7 @@ class _EgitimTalepleriPageState extends ConsumerState<EgitimTalepleriPage> {
 
             return Scrollbar(
               child: ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, index) => const Divider(),
                 shrinkWrap: true,
                 itemCount: talepler.length,
