@@ -59,7 +59,6 @@ class _EgitimTalepleriPageState extends ConsumerState<EgitimTalepleriPage> {
 
             return Scrollbar(
               child: ListView.separated(
-                physics: const NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, index) => const Divider(),
                 shrinkWrap: true,
                 itemCount: talepler.length,
