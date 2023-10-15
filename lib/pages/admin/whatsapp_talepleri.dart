@@ -43,7 +43,7 @@ class _WhatsappTalepleriPageState extends ConsumerState<WhatsappTalepleriPage> {
                     // ]
                     for (var element in secilenTalepler) {
                       list.add([
-                        "TEMP-${element.adiSoyadi}",
+                        "TEMP6-${element.adiSoyadi}",
                         element.telefonNumarasi.toString()
                       ]);
                     }

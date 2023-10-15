@@ -45,6 +45,7 @@ class _EgitimTalepleriPageState extends ConsumerState<EgitimTalepleriPage> {
               return Center(
                 child: Text(
                   'Talep bulunamadı',
+                  
                   style: GoogleFonts.poppins(
                     color: Colors.black.withOpacity(0.7),
                     fontWeight: FontWeight.w600,
