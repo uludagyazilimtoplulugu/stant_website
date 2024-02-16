@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "160806368168",
+    "project_id": "stant-website",
+    "storage_bucket": "stant-website.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160806368168:android:544c18285c8296a8bc239d",
+        "android_client_info": {
+          "package_name": "com.example.yazilim_toplulugu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwlfaIhTeNvK-oDJjo4OVQSh0Fgu8TRRM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

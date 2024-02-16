@@ -33,7 +33,8 @@ class MyApp extends StatelessWidget {
       navigatorKey: GlobalcontextService.navigatorKey,
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 0.9),
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: const TextScaler.linear(0.9)),
           child: child!,
         );
       },

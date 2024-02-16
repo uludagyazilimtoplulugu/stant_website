@@ -602,6 +602,82 @@ class _MainPageState extends ConsumerState<MainPageMobile> {
                       top: MediaQuery.of(context).size.height * 0.05,
                     ),
                     child: Text(
+                      'Senenin en büyük teknoloji ve girişimicilik zirvesi olan StartTech etkinliği için tıkla!',
+                      style: GoogleFonts.poppins(
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white.withOpacity(0.8),
+                      ),
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * 0.06,
+                      vertical: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        fixedSize: Size(
+                          MediaQuery.of(context).size.width * 0.8,
+                          MediaQuery.of(context).size.height * 0.08,
+                        ),
+                        backgroundColor: const Color(0xff0b3d91),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            FontAwesomeIcons.rocket,
+                            color: Colors.white,
+                          ),
+                          const Spacer(),
+                          Text(
+                            "StartTech'e Katıl",
+                            style: GoogleFonts.poppins(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.032,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      onPressed: () async {
+                        try {
+                          bool launched =
+                              // ignore: deprecated_member_use
+                              await launch(
+                            'https://www.instagram.com/reel/C2-Z9xdtZLF/?igsh=NWQ1MGlobHlsaGJ2',
+                            forceSafariVC: false,
+                          );
+
+                          if (!launched) {
+                            // ignore: deprecated_member_use
+                            launch(
+                                'https://www.instagram.com/reel/C2-Z9xdtZLF/?igsh=NWQ1MGlobHlsaGJ2');
+                          }
+                        } catch (e) {
+                          // ignore: deprecated_member_use
+                          launch(
+                              'https://www.instagram.com/reel/C2-Z9xdtZLF/?igsh=NWQ1MGlobHlsaGJ2');
+                        }
+                      },
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.1,
+                      left: MediaQuery.of(context).size.width * 0.06,
+                      top: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    child: Text(
                       'Yazılım öğrenmek istiyorsan butona tıkla. Böylece öğrenmek istediğin alan hakkında daha fazla çalışırız.',
                       style: GoogleFonts.poppins(
                         fontSize: MediaQuery.of(context).size.width * 0.05,
@@ -736,80 +812,6 @@ class _MainPageState extends ConsumerState<MainPageMobile> {
                             builder: (context) => const AdminLoginPage(),
                           ),
                         );
-                      },
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width * 0.1,
-                      left: MediaQuery.of(context).size.width * 0.06,
-                      top: MediaQuery.of(context).size.height * 0.05,
-                    ),
-                    child: Text(
-                      'Senenin ilk etkinliği olan NASA Space Apps Hackhathonunda yer almak istersen tıkla!',
-                      style: GoogleFonts.poppins(
-                        fontSize: MediaQuery.of(context).size.width * 0.05,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white.withOpacity(0.8),
-                      ),
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.06,
-                      vertical: MediaQuery.of(context).size.height * 0.02,
-                    ),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        fixedSize: Size(
-                          MediaQuery.of(context).size.width * 0.8,
-                          MediaQuery.of(context).size.height * 0.08,
-                        ),
-                        backgroundColor: const Color(0xff0b3d91),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            FontAwesomeIcons.rocket,
-                            color: Colors.white,
-                          ),
-                          const Spacer(),
-                          Text(
-                            "NASA Space Apps Hackathon'a Katıl",
-                            style: GoogleFonts.poppins(
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.032,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                      onPressed: () async {
-                        try {
-                          bool launched =
-                              // ignore: deprecated_member_use
-                              await launch(
-                            'https://www.instagram.com/spaceappsbursa/',
-                            forceSafariVC: false,
-                          );
-
-                          if (!launched) {
-                            // ignore: deprecated_member_use
-                            launch('https://www.instagram.com/spaceappsbursa/');
-                          }
-                        } catch (e) {
-                          // ignore: deprecated_member_use
-                          launch('https://www.instagram.com/spaceappsbursa/');
-                        }
                       },
                     ),
                   ),
